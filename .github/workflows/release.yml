@@ -1,0 +1,25 @@
+name: publish release
+on:
+  release:
+    types:
+      - released
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: '0'
+    - name: Set Tag
+      id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+    - name: get version
+      run: echo ${{ steps.vars.outputs.tag }}
+    - name: create and push docker build
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cybergroupignite/runtime
+        tags: ${{ steps.vars.outputs.tag }}, latest
+        build_args: build_tag=${{steps.vars.outputs.tag}}   

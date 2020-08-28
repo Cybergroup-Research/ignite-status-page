@@ -1,0 +1,24 @@
+{
+    "name":"CG Ignite Runtime",
+    "description": "Low-Code Integration & Digital Experience Platform.",
+    "keywords": [
+      "productivity",
+      "integration",
+      "digital experience",
+      "salesforce",
+      "odata"
+    ],
+    "website": "https://cgignite.com/",
+    "repository": "https://github.com/Cybergroup-Research/cgdx-runtime",
+    "addons": [
+        {
+        "plan": "heroku-postgresql",
+        "options": {
+            "version": "12"
+        }
+        },
+        {
+            "plan": "cgignite"
+        }
+    ]
+}
